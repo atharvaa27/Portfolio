@@ -1,16 +1,46 @@
 import * as THREE from "three";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+const CHARACTER_TRIGGER_IDS = [
+  "character-landing",
+  "character-about",
+  "character-whatido",
+  "character-career",
+];
+
+let screenFlickerInterval: ReturnType<typeof window.setInterval> | null = null;
+
+const clearCharacterTriggers = () => {
+  CHARACTER_TRIGGER_IDS.forEach((id) => {
+    ScrollTrigger.getById(id)?.kill();
+  });
+};
+
+export const clearCharacterScrollState = () => {
+  clearCharacterTriggers();
+  if (screenFlickerInterval) {
+    clearInterval(screenFlickerInterval);
+    screenFlickerInterval = null;
+  }
+};
 
 export function setCharTimeline(
   character: THREE.Object3D<THREE.Object3DEventMap> | null,
   camera: THREE.PerspectiveCamera
 ) {
+  clearCharacterTriggers();
+  const baseRotationY = character?.rotation.y ?? 0;
   let intensity: number = 0;
-  setInterval(() => {
+  if (screenFlickerInterval) {
+    clearInterval(screenFlickerInterval);
+  }
+  screenFlickerInterval = window.setInterval(() => {
     intensity = Math.random();
   }, 200);
   const tl1 = gsap.timeline({
     scrollTrigger: {
+      id: "character-landing",
       trigger: ".landing-section",
       start: "top top",
       end: "bottom top",
@@ -20,6 +50,7 @@ export function setCharTimeline(
   });
   const tl2 = gsap.timeline({
     scrollTrigger: {
+      id: "character-about",
       trigger: ".about-section",
       start: "center 55%",
       end: "bottom top",
@@ -29,6 +60,7 @@ export function setCharTimeline(
   });
   const tl3 = gsap.timeline({
     scrollTrigger: {
+      id: "character-whatido",
       trigger: ".whatIDO",
       start: "top top",
       end: "bottom top",
@@ -52,6 +84,7 @@ export function setCharTimeline(
       object.material.transparent = true;
       object.material.opacity = 0;
       object.material.emissive.set("#B0F5EA");
+      gsap.killTweensOf(object.material);
       gsap.timeline({ repeat: -1, repeatRefresh: true }).to(object.material, {
         emissiveIntensity: () => intensity * 8,
         duration: () => Math.random() * 0.6,
@@ -64,7 +97,12 @@ export function setCharTimeline(
   if (window.innerWidth > 1024) {
     if (character) {
       tl1
-        .fromTo(character.rotation, { y: 0 }, { y: 0.7, duration: 1 }, 0)
+        .fromTo(
+          character.rotation,
+          { y: baseRotationY },
+          { y: baseRotationY + 0.7, duration: 1 },
+          0
+        )
         .to(camera.position, { z: 22 }, 0)
         .fromTo(".character-model", { x: 0 }, { x: "-25%", duration: 1 }, 0)
         .to(".landing-container", { opacity: 0, duration: 0.4 }, 0)
@@ -85,20 +123,15 @@ export function setCharTimeline(
           { pointerEvents: "none", x: "-12%", delay: 2, duration: 5 },
           0
         )
-        .to(character.rotation, { y: 0.92, x: 0.12, delay: 3, duration: 3 }, 0)
-        .to(neckBone!.rotation, { x: 0.6, delay: 2, duration: 3 }, 0)
-        .to(monitor.material, { opacity: 1, duration: 0.8, delay: 3.2 }, 0)
-        .to(screenLight.material, { opacity: 1, duration: 0.8, delay: 4.5 }, 0)
+        .to(
+          character.rotation,
+          { y: baseRotationY + 0.92, x: 0.12, delay: 3, duration: 3 },
+          0
+        )
         .fromTo(
           ".what-box-in",
           { display: "none" },
           { display: "flex", duration: 0.1, delay: 6 },
-          0
-        )
-        .fromTo(
-          monitor.position,
-          { y: -10, z: 2 },
-          { y: 0, z: 0, delay: 1.5, duration: 3 },
           0
         )
         .fromTo(
@@ -107,6 +140,13 @@ export function setCharTimeline(
           { opacity: 0, scale: 0, y: "-70%", duration: 5, delay: 2 },
           0.3
         );
+      if (neckBone) tl2.to(neckBone.rotation, { x: 0.6, delay: 2, duration: 3 }, 0);
+      if (monitor) {
+        tl2
+          .to(monitor.material, { opacity: 1, duration: 0.8, delay: 3.2 }, 0)
+          .fromTo(monitor.position, { y: -10, z: 2 }, { y: 0, z: 0, delay: 1.5, duration: 3 }, 0);
+      }
+      if (screenLight) tl2.to(screenLight.material, { opacity: 1, duration: 0.8, delay: 4.5 }, 0);
 
       tl3
         .fromTo(
@@ -133,8 +173,10 @@ export function setCharTimeline(
 }
 
 export function setAllTimeline() {
+  ScrollTrigger.getById("character-career")?.kill();
   const careerTimeline = gsap.timeline({
     scrollTrigger: {
+      id: "character-career",
       trigger: ".career-section",
       start: "top 30%",
       end: "100% center",

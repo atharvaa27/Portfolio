@@ -10,21 +10,34 @@ interface ParaElement extends HTMLElement {
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText);
 
+const revertAnimatedText = (element: ParaElement) => {
+  if (element.anim) {
+    element.anim.progress(1).kill();
+    delete element.anim;
+  }
+
+  if (element.split) {
+    element.split.revert();
+    delete element.split;
+  }
+};
+
 export default function setSplitText() {
   ScrollTrigger.config({ ignoreMobileResize: true });
-  if (window.innerWidth < 900) return;
   const paras: NodeListOf<ParaElement> = document.querySelectorAll(".para");
   const titles: NodeListOf<ParaElement> = document.querySelectorAll(".title");
+
+  if (window.innerWidth < 900) {
+    [...paras, ...titles].forEach(revertAnimatedText);
+    return;
+  }
 
   const TriggerStart = window.innerWidth <= 1024 ? "top 60%" : "20% 60%";
   const ToggleAction = "play pause resume reverse";
 
   paras.forEach((para: ParaElement) => {
     para.classList.add("visible");
-    if (para.anim) {
-      para.anim.progress(1).kill();
-      para.split?.revert();
-    }
+    revertAnimatedText(para);
 
     para.split = new SplitText(para, {
       type: "lines,words",
@@ -49,10 +62,7 @@ export default function setSplitText() {
     );
   });
   titles.forEach((title: ParaElement) => {
-    if (title.anim) {
-      title.anim.progress(1).kill();
-      title.split?.revert();
-    }
+    revertAnimatedText(title);
     title.split = new SplitText(title, {
       type: "chars,lines",
       linesClass: "split-line",
@@ -75,6 +85,4 @@ export default function setSplitText() {
       }
     );
   });
-
-  ScrollTrigger.addEventListener("refresh", () => setSplitText());
 }

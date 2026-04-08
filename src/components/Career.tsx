@@ -15,43 +15,46 @@ const Career = () => {
           <div className="career-info-box">
             <div className="career-info-in">
               <div className="career-role">
-                <h4>Full Stack Developer</h4>
-                <h5>Ikshan</h5>
-              </div>
-              <h3>2020</h3>
-            </div>
-            <p>
-              Built 6+ complete applications using React.js. Integrated backend
-              authentication using Node.js & MongoDB. Created responsive UI/UX
-              and designed wireframes using Figma.
-            </p>
-          </div>
-          <div className="career-info-box">
-            <div className="career-info-in">
-              <div className="career-role">
-                <h4>Senior Full Stack Developer</h4>
-                <h5>Monocept (Max Life Insurance)</h5>
-              </div>
-              <h3>2021</h3>
-            </div>
-            <p>
-              Led two development teams on Mpro, a large-scale insurance
-              operations platform. Developed multiple modules using React.js &
-              migrated critical functionalities to Node.js microservices.
-            </p>
-          </div>
-          <div className="career-info-box">
-            <div className="career-info-in">
-              <div className="career-role">
-                <h4>Full Stack Developer</h4>
-                <h5>Logic Loop</h5>
+                <h4>Software Engineer (AI)</h4>
+                <h5>COSMOS Research Center, University of Arkansas at Little Rock</h5>
               </div>
               <h3>NOW</h3>
             </div>
             <p>
-              Building Solid, a proprietary low-code platform using Angular,
-              Next.js & NestJS. Delivering production-ready CMS-based projects
-              including e-commerce, CRM, and import-export automation systems.
+              Designed and owned production-grade AI applications using Python,
+              NLP, and generative AI. Productionized ML pipelines with Scikit-learn,
+              XGBoost, and LightGBM, and deployed Dockerized inference services for
+              scalable analytics and automation.
+            </p>
+          </div>
+          <div className="career-info-box">
+            <div className="career-info-in">
+              <div className="career-role">
+                <h4>Software Engineer</h4>
+                <h5>Honeywell, USA</h5>
+              </div>
+              <h3>2024</h3>
+            </div>
+            <p>
+              Developed and deployed AI/ML services for underwriting and claims
+              analytics, including customer segmentation and policy lapse prediction.
+              Built robust feature engineering and validation pipelines, and shipped
+              containerized inference services on AWS.
+            </p>
+          </div>
+          <div className="career-info-box">
+            <div className="career-info-in">
+              <div className="career-role">
+                <h4>Software Engineer</h4>
+                <h5>Mindtree, India</h5>
+              </div>
+              <h3>2021</h3>
+            </div>
+            <p>
+              Delivered AI-enabled Python applications for policy servicing and claims
+              analytics. Built backend services with Django and Flask, exposed
+              RESTful APIs for predictive insights, and led AWS deployments for
+              reliable ML-powered production environments.
             </p>
           </div>
         </div>

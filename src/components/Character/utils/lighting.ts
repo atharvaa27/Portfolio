@@ -3,7 +3,7 @@ import { RGBELoader } from "three-stdlib";
 import { gsap } from "gsap";
 
 const setLighting = (scene: THREE.Scene) => {
-  const directionalLight = new THREE.DirectionalLight(0x5eead4, 0);
+  const directionalLight = new THREE.DirectionalLight(0xf9a8d4, 0);
   directionalLight.intensity = 0;
   directionalLight.position.set(-0.47, -0.32, -1);
   directionalLight.castShadow = true;
@@ -13,10 +13,14 @@ const setLighting = (scene: THREE.Scene) => {
   directionalLight.shadow.camera.far = 50;
   scene.add(directionalLight);
 
-  const pointLight = new THREE.PointLight(0x22d3ee, 0, 100, 3);
+  const pointLight = new THREE.PointLight(0xf472b6, 0, 100, 3);
   pointLight.position.set(3, 12, 4);
   pointLight.castShadow = true;
   scene.add(pointLight);
+
+  const fillLight = new THREE.HemisphereLight(0xfbcfe8, 0x120710, 0);
+  fillLight.position.set(0, 24, 0);
+  scene.add(fillLight);
 
   new RGBELoader()
     .setPath("/models/")
@@ -28,6 +32,7 @@ const setLighting = (scene: THREE.Scene) => {
     });
 
   function setPointLight(screenLight: any) {
+    if (!screenLight) return;
     if (screenLight.material.opacity > 0.9) {
       pointLight.intensity = screenLight.material.emissiveIntensity * 20;
     } else {
@@ -44,6 +49,16 @@ const setLighting = (scene: THREE.Scene) => {
     });
     gsap.to(directionalLight, {
       intensity: 1,
+      duration: duration,
+      ease: ease,
+    });
+    gsap.to(fillLight, {
+      intensity: 0.45,
+      duration: duration,
+      ease: ease,
+    });
+    gsap.to(pointLight, {
+      intensity: 1.2,
       duration: duration,
       ease: ease,
     });
