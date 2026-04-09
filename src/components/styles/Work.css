@@ -29,7 +29,7 @@
 }
 
 .work-header {
-  max-width: 760px;
+  max-width: 1080px;
   margin-bottom: 46px;
 }
 
@@ -48,9 +48,12 @@
   font-weight: 500;
   line-height: 0.95;
   margin: 0;
+  max-width: 13ch;
+  text-wrap: balance;
 }
 
 .work-header h2 > span {
+  display: block;
   color: var(--accentColor);
 }
 

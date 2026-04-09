@@ -93,7 +93,6 @@ export function setCharTimeline(
       screenLight = object;
     }
   });
-  let neckBone = character?.getObjectByName("spine005");
   if (window.innerWidth > 1024) {
     if (character) {
       tl1
@@ -140,7 +139,6 @@ export function setCharTimeline(
           { opacity: 0, scale: 0, y: "-70%", duration: 5, delay: 2 },
           0.3
         );
-      if (neckBone) tl2.to(neckBone.rotation, { x: 0.6, delay: 2, duration: 3 }, 0);
       if (monitor) {
         tl2
           .to(monitor.material, { opacity: 1, duration: 0.8, delay: 3.2 }, 0)

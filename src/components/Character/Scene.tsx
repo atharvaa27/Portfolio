@@ -181,6 +181,13 @@ const Scene = () => {
         landingDiv.addEventListener("touchstart", onTouchStart);
         landingDiv.addEventListener("touchend", onTouchEnd);
       }
+
+      const isLandingActive = () => {
+        if (!landingDiv) return false;
+        const rect = landingDiv.getBoundingClientRect();
+        return rect.top <= window.innerHeight * 0.2 && rect.bottom >= window.innerHeight * 0.55;
+      };
+
       const animate = () => {
         animationFrameId = requestAnimationFrame(animate);
         const delta = clock.getDelta();
@@ -188,7 +195,8 @@ const Scene = () => {
           mixer.update(delta);
         }
         const shouldTrackCursor = animations?.shouldTrackCursor?.() ?? true;
-        if (shouldTrackCursor && spineBone) {
+        const shouldApplyHeroTracking = shouldTrackCursor && isLandingActive();
+        if (shouldApplyHeroTracking && spineBone) {
           handleHeadRotation(
             spineBone,
             mouse.x,
@@ -199,7 +207,7 @@ const Scene = () => {
             0.32
           );
         }
-        if (shouldTrackCursor && neckBone) {
+        if (shouldApplyHeroTracking && neckBone) {
           handleHeadRotation(
             neckBone,
             mouse.x,
@@ -210,7 +218,7 @@ const Scene = () => {
             0.68
           );
         }
-        if (shouldTrackCursor && headBone) {
+        if (shouldApplyHeroTracking && headBone) {
           handleHeadRotation(
             headBone,
             mouse.x,
@@ -222,7 +230,7 @@ const Scene = () => {
           );
           light.setPointLight(screenLight);
         }
-        if (shouldTrackCursor && cursorEyes) {
+        if (shouldApplyHeroTracking && cursorEyes) {
           updateCursorEyes(cursorEyes, mouse.x, mouse.y, THREE.MathUtils.lerp);
         }
         animations?.update(delta);

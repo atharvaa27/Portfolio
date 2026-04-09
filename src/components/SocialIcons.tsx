@@ -58,7 +58,7 @@ const SocialIcons = () => {
     <div className="icons-section">
       <div className="social-icons" data-cursor="icons" id="social">
         <span>
-          <a href="mailto:atharvaarane89@gmail.com">
+          <a href="mailto:atharvaaarane11@gmail.com">
             <MdEmail />
           </a>
         </span>

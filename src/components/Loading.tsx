@@ -61,17 +61,19 @@ const Loading = ({ percent }: { percent: number }) => {
       </div>
       <div className="loading-screen">
         <div className="loading-marquee">
-          <Marquee>
-            <span> Software Engineer</span> <span>AI Engineer</span>
-            <span> ML Systems</span> <span>Software Engineer</span>
+          <Marquee gradient={false}>
+            <span>Software Engineer</span>
+            <span>AI Engineer</span>
+            <span>ML Systems</span>
+            <span>Software Engineer</span>
           </Marquee>
         </div>
         <div
-          className={`loading-wrap ${clicked && "loading-clicked"}`}
+          className={`loading-wrap ${clicked ? "loading-clicked" : ""}`}
           onMouseMove={(e) => handleMouseMove(e)}
         >
           <div className="loading-hover"></div>
-          <div className={`loading-button ${loaded && "loading-complete"}`}>
+          <div className={`loading-button ${loaded ? "loading-complete" : ""}`}>
             <div className="loading-container">
               <div className="loading-content">
                 <div className="loading-content-in">

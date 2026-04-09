@@ -2,8 +2,7 @@
   position: fixed;
   width: 100vw;
   height: var(--vh);
-  /* background-image: linear-gradient(#cbb1ff, #d8c4ff); */
-  background-color: #e0f2f1;
+  background-color: #dbeeff;
   z-index: 999999999;
   display: flex;
   place-items: center;
@@ -29,7 +28,6 @@
   border-radius: 50%;
   width: 60px;
   height: 60px;
-  opacity: 1;
   position: absolute;
   z-index: 99;
   filter: blur(60px);
@@ -49,14 +47,14 @@
   --Lsize: 145px;
   padding: 6px;
   position: relative;
-  min-width: 0px;
-  min-height: 0px;
+  min-width: 0;
+  min-height: 0;
   border-radius: 100px;
   background-color: #000;
   overflow: hidden;
   transition: 0.8s ease-in-out;
   transition-delay: 0.2s;
-  box-shadow: 0px 15px 15px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 15px 15px 0 rgba(0, 0, 0, 0.2);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -77,7 +75,7 @@
 }
 
 .loading-hover {
-  background-color: #2dd4bf;
+  background-color: #7dd3fc;
   width: 250px;
   height: 120px;
   position: absolute;
@@ -145,7 +143,7 @@
 
 .loading-box {
   position: absolute;
-  right: 0px;
+  right: 0;
   top: 50%;
   transform: translate(100%, -50%);
   width: 15px;
@@ -186,7 +184,6 @@
   position: absolute;
   width: 100%;
   max-width: var(--Lsize);
-  /* height: 45px; */
   top: 50%;
   transition: 1s;
   left: 50px;
@@ -195,7 +192,7 @@
 }
 
 .loading-complete .loading-container {
-  max-width: 0px;
+  max-width: 0;
 }
 
 .loading-header {
@@ -206,7 +203,7 @@
   display: flex;
   justify-content: space-between;
   box-sizing: border-box;
-  padding: 20px 0px;
+  padding: 20px 0;
   left: 50%;
   transform: translateX(-50%);
   top: 0;
@@ -283,7 +280,7 @@
 
 .loaderGame-line {
   float: left;
-  margin: 0px 20px;
+  margin: 0 20px;
   margin-bottom: 40px;
   position: relative;
   width: 10px;
@@ -294,7 +291,7 @@
 
 .loaderGame-line:nth-child(2n) {
   margin-top: 40px;
-  margin-bottom: 0px;
+  margin-bottom: 0;
 }
 
 .loaderGame-ball {
@@ -304,7 +301,7 @@
   width: 15px;
   height: 15px;
   border-radius: 50%;
-  background-color: #2dd4bf;
+  background-color: #60a5fa;
   animation: ball25 7s infinite;
   transform: translateY(10px);
   animation-timing-function: cubic-bezier(0.3, 1.18, 0.63, 1.28);
@@ -323,7 +320,7 @@
 }
 
 .loading-marquee span {
-  padding: 0px 50px;
+  padding: 0 50px;
   position: relative;
 }
 
@@ -335,7 +332,7 @@
   position: absolute;
   top: 50%;
   border-radius: 50px;
-  left: 0px;
+  left: 0;
   transform: translate(-50%, -50%);
 }
 
@@ -394,7 +391,7 @@
 
 @media only screen and (min-width: 500px) {
   .loading-header {
-    padding: 20px 0px;
+    padding: 20px 0;
   }
 
   .loader-title {
@@ -404,7 +401,7 @@
 
 @media only screen and (min-width: 1200px) {
   .loading-header {
-    padding: 35px 0px;
+    padding: 35px 0;
   }
 
   .loader-title {
