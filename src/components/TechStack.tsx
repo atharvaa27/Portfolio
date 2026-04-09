@@ -39,6 +39,7 @@ import {
   RigidBody,
   RapierRigidBody,
 } from "@react-three/rapier";
+import { withBase } from "./utils/basePath";
 
 type TechBadge = {
   label: string;
@@ -353,7 +354,7 @@ const TechStack = () => {
           ))}
         </Physics>
         <Environment
-          files="/models/char_enviorment.hdr"
+          files={withBase("models/char_enviorment.hdr")}
           environmentIntensity={0.5}
           environmentRotation={[0, 4, 2]}
         />

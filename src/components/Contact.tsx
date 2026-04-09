@@ -1,5 +1,6 @@
 import { MdArrowOutward, MdCopyright } from "react-icons/md";
 import "./styles/Contact.css";
+import { withBase } from "./utils/basePath";
 
 const Contact = () => {
   return (
@@ -32,7 +33,7 @@ const Contact = () => {
               Linkedin <MdArrowOutward />
             </a>
             <a
-              href="/Atharvaa-Rane-Software-Engineer-Resume.pdf"
+              href={withBase("Atharvaa-Rane-Software-Engineer-Resume.pdf")}
               target="_blank"
               data-cursor="disable"
               className="contact-social"

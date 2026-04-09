@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three-stdlib";
 import type { LoadedCharacter } from "./character";
+import { withBase } from "../../utils/basePath";
 
 const animationLoader = new GLTFLoader();
 const ROOT_MOTION_TRACK_PATTERN =
@@ -40,7 +41,7 @@ const loadAnimationClip = () => {
     animationClipPromise = new Promise<THREE.AnimationClip | null>(
       (resolve, reject) => {
         animationLoader.load(
-          "/models/breakdance-ending-3.glb",
+          withBase("models/breakdance-ending-3.glb"),
           (gltf) => {
             const clip = gltf.animations[0] ?? null;
             resolve(clip ? trimClipForHoldPose(removeRootMotion(clip)) : null);

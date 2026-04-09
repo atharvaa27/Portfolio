@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three-stdlib";
 import { setCharTimeline, setAllTimeline } from "../../utils/GsapScroll";
+import { withBase } from "../../utils/basePath";
 
 export type LoadedCharacter = THREE.Group & {
   animations?: THREE.AnimationClip[];
@@ -20,7 +21,7 @@ const setCharacter = (
     return new Promise<LoadedCharacter | null>((resolve, reject) => {
       try {
         loader.load(
-          "/models/thinking.glb",
+          withBase("models/thinking.glb"),
           async (gltf) => {
             const character = gltf.scene as LoadedCharacter;
             character.animations = gltf.animations;

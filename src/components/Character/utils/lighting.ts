@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import { RGBELoader } from "three-stdlib";
 import { gsap } from "gsap";
+import { withBase } from "../../utils/basePath";
 
 const setLighting = (scene: THREE.Scene) => {
   const directionalLight = new THREE.DirectionalLight(0xf9a8d4, 0);
@@ -22,14 +23,12 @@ const setLighting = (scene: THREE.Scene) => {
   fillLight.position.set(0, 24, 0);
   scene.add(fillLight);
 
-  new RGBELoader()
-    .setPath("/models/")
-    .load("char_enviorment.hdr?v=2", function (texture) {
-      texture.mapping = THREE.EquirectangularReflectionMapping;
-      scene.environment = texture;
-      scene.environmentIntensity = 0;
-      scene.environmentRotation.set(5.76, 85.85, 1);
-    });
+  new RGBELoader().load(withBase("models/char_enviorment.hdr?v=2"), function (texture) {
+    texture.mapping = THREE.EquirectangularReflectionMapping;
+    scene.environment = texture;
+    scene.environmentIntensity = 0;
+    scene.environmentRotation.set(5.76, 85.85, 1);
+  });
 
   function setPointLight(screenLight: any) {
     if (!screenLight) return;
