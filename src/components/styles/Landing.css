@@ -515,10 +515,11 @@ h2.landing-info-h2 {
 
 @media screen and (min-width: 1025px) {
   .character-model {
-    height: 100vh;
-    bottom: 0;
+    height: min(84vh, 860px);
+    bottom: -18px;
     z-index: 11;
     position: fixed;
+    width: min(100%, 1080px);
   }
 
   .character-model::after,
@@ -528,21 +529,57 @@ h2.landing-info-h2 {
 
   .landing-intro {
     top: 50%;
-    left: auto;
-    right: 65%;
+    left: clamp(56px, 5vw, 96px);
+    right: auto;
     transform: translate(0%, -50%);
-    width: min(31vw, 470px);
+    width: min(26vw, 390px);
     max-width: none;
   }
 
   .landing-info {
-    top: 51%;
+    top: 50%;
     bottom: auto;
-    left: 66%;
-    right: auto;
+    right: clamp(56px, 5vw, 96px);
+    left: auto;
     transform: translate(0%, -50%);
-    width: min(29vw, 420px);
+    width: min(24vw, 330px);
     max-width: none;
+  }
+
+  .landing-intro h1 {
+    font-size: clamp(42px, 4vw, 58px);
+  }
+
+  .landing-intro h2,
+  .landing-info h3 {
+    font-size: clamp(12px, 1vw, 15px);
+  }
+
+  .landing-summary {
+    font-size: 13px;
+  }
+
+  .landing-info h2 {
+    font-size: clamp(40px, 4vw, 58px);
+  }
+
+  .landing-word-window {
+    min-height: clamp(36px, 4vw, 54px);
+  }
+
+  .landing-lab-card {
+    max-width: 320px;
+    padding: 16px;
+    border-radius: 22px;
+  }
+
+  .landing-lab-grid {
+    gap: 10px;
+  }
+
+  .landing-lab-tile,
+  .landing-pipeline-step {
+    padding: 12px;
   }
 
   .landing-summary {
@@ -552,11 +589,11 @@ h2.landing-info-h2 {
 
 @media screen and (min-width: 1280px) {
   .landing-intro {
-    right: 69%;
+    width: min(27vw, 420px);
   }
 
   .landing-info {
-    left: 70%;
+    width: min(25vw, 350px);
   }
 
   .landing-metric-grid {

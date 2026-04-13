@@ -39,6 +39,10 @@
   font-size: 15px;
   letter-spacing: 1px;
   font-weight: 500;
+  max-width: min(28vw, 280px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .navbar-title {
   font-weight: 700;
@@ -71,11 +75,12 @@
     padding: 35px 0px;
   }
   .header ul {
-    column-gap: 80px;
+    column-gap: 64px;
     font-size: 16px;
   }
   .navbar-connect {
-    font-size: 16px;
+    font-size: 15px;
+    max-width: min(30vw, 320px);
   }
   .navbar-title {
     font-size: 18px;
