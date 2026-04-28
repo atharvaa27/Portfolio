@@ -31,15 +31,15 @@ const Career = () => {
             <div className="career-info-in">
               <div className="career-role">
                 <h4>Software Engineer</h4>
-                <h5>Honeywell, USA</h5>
+                <h5>HCL Tech, USA</h5>
               </div>
               <h3>2024</h3>
             </div>
             <p>
-              Developed and deployed AI/ML services for underwriting and claims
-              analytics, including customer segmentation and policy lapse prediction.
-              Built robust feature engineering and validation pipelines, and shipped
-              containerized inference services on AWS.
+              Designed and deployed LLM-powered applications with RAG, LangChain,
+              OpenAI, and vector databases. Built FastAPI and Flask microservices
+              for AI/ML model serving, optimized inference with ONNX and Triton,
+              and delivered React and Node.js interfaces for enterprise workflows.
             </p>
           </div>
           <div className="career-info-box">
@@ -51,10 +51,10 @@ const Career = () => {
               <h3>2021</h3>
             </div>
             <p>
-              Delivered AI-enabled Python applications for policy servicing and claims
-              analytics. Built backend services with Django and Flask, exposed
-              RESTful APIs for predictive insights, and led AWS deployments for
-              reliable ML-powered production environments.
+              Developed ML models and NLP solutions with Scikit-learn, TensorFlow,
+              and Hugging Face Transformers. Built Flask and FastAPI services,
+              data pipelines with Python, Pandas, SQL, Spark, and Kafka, and
+              supported Docker, Jenkins, and Git-based deployment workflows.
             </p>
           </div>
         </div>

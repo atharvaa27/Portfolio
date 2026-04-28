@@ -65,11 +65,34 @@ const Scene = () => {
       const clock = new THREE.Clock();
 
       const light = setLighting(scene);
-      let progress = setProgress((value) => setLoading(value));
+      const progress = setProgress((value) => setLoading(value));
+      let hasCompletedInitialLoading = false;
+      const completeInitialLoading = () => {
+        if (hasCompletedInitialLoading) {
+          return;
+        }
+
+        hasCompletedInitialLoading = true;
+        progress.loaded().then(() => {
+          if (isDisposed) {
+            return;
+          }
+
+          introTimeoutId = window.setTimeout(() => {
+            if (isDisposed) {
+              return;
+            }
+
+            light.turnOnLights();
+            animations?.startIntro();
+          }, 2500);
+        });
+      };
       const { loadCharacter } = setCharacter(renderer, scene, camera);
 
       loadCharacter().then(async (loadedCharacter) => {
         if (!loadedCharacter || isDisposed) {
+          completeInitialLoading();
           return;
         }
 
@@ -83,6 +106,7 @@ const Scene = () => {
         if (!scene.children.includes(character)) {
           scene.add(character);
         }
+        completeInitialLoading();
 
         try {
           const nextAnimations = await setAnimations(loadedCharacter);
@@ -124,20 +148,12 @@ const Scene = () => {
           cursorEyes = createCursorEyes(headBone);
         }
         screenLight = character.getObjectByName("screenlight") || null;
-        progress.loaded().then(() => {
-          if (isDisposed) {
-            return;
-          }
-
-          introTimeoutId = window.setTimeout(() => {
-            if (isDisposed) {
-              return;
-            }
-
-            light.turnOnLights();
-            animations?.startIntro();
-          }, 2500);
-        });
+        completeInitialLoading();
+      }).catch((error) => {
+        if (!isDisposed) {
+          console.error("Error loading character scene:", error);
+          completeInitialLoading();
+        }
       });
 
       const onResize = () => {

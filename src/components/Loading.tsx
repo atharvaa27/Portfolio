@@ -11,28 +11,56 @@ const Loading = ({ percent }: { percent: number }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [clicked, setClicked] = useState(false);
 
-  if (percent >= 100) {
-    setTimeout(() => {
+  useEffect(() => {
+    if (percent < 100) {
+      return;
+    }
+
+    let isLoadedTimeoutId: number | undefined;
+    const loadedTimeoutId = window.setTimeout(() => {
       setLoaded(true);
-      setTimeout(() => {
+      isLoadedTimeoutId = window.setTimeout(() => {
         setIsLoaded(true);
       }, 1000);
     }, 600);
-  }
+
+    return () => {
+      window.clearTimeout(loadedTimeoutId);
+      window.clearTimeout(isLoadedTimeoutId);
+    };
+  }, [percent]);
 
   useEffect(() => {
+    if (percent < 91 || isLoaded) {
+      return;
+    }
+
+    const fallbackTimeoutId = window.setTimeout(() => {
+      setLoaded(true);
+      setIsLoaded(true);
+    }, 8000);
+
+    return () => window.clearTimeout(fallbackTimeoutId);
+  }, [isLoaded, percent]);
+
+  useEffect(() => {
+    if (!isLoaded) {
+      return;
+    }
+
+    let finishTimeoutId: number | undefined;
     import("./utils/initialFX").then((module) => {
-      if (isLoaded) {
-        setClicked(true);
-        setTimeout(() => {
-          if (module.initialFX) {
-            module.initialFX();
-          }
-          setIsLoading(false);
-        }, 900);
-      }
+      setClicked(true);
+      finishTimeoutId = window.setTimeout(() => {
+        if (module.initialFX) {
+          module.initialFX();
+        }
+        setIsLoading(false);
+      }, 900);
     });
-  }, [isLoaded]);
+
+    return () => window.clearTimeout(finishTimeoutId);
+  }, [isLoaded, setIsLoading]);
 
   function handleMouseMove(e: React.MouseEvent<HTMLElement>) {
     const { currentTarget: target } = e;
